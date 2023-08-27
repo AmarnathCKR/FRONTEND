@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.display-none{
+  @apply hidden;
+}
+
+@font-face {
+  font-family: obitron;
+  src: url(/public/fonts/Orbitron-VariableFont_wght.ttf);
+}
+
+body { 
+  font-family: obitron;
+}
+.container{
+  font-family: obitron;
+}
+#root{
+  font-family: obitron;
+}
+
+a{
+  font-family: obitron;
+}
+
+div{
+  font-family: obitron;
+}
+
+.modal-local {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loader-local {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-local-content {
+  width: 500px;
+  width: 500px;
+  background-color: #fff;
+}
+
+.modal-local-content-pay {
+  width: 600px;
+  width: 500px;
+  background-color: #fff;
+}
+
+.modal-local-content-chat  {
+  
+  width: 720px;
+  background-color: #fff;
+}
+.modal-local-content-review  {
+  
+  width: 480px;
+  
+  background-color: #fff;
+}
+.modal-local-header,
+.modal-local-footer {
+  padding: 10px;
+}
+
+.modal-local-title {
+  margin: 0;
+}
+
+.modal-local-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-local-body-pay {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.local-wrapper {
+  display: grid;
+  /* height: 100vh; */
+
+  place-items: center;
+}
+
+.scroll-x {
+    overflow-x: auto;
+    
+}
+
+.scroll-x::-webkit-scrollbar{
+    display: none;
+}
+
+.modal-local-content-111 {
+  height: 600px;
+  background-color: #fff;
+}
+
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-image: linear-gradient(to bottom, #000000 0%, #00000096 60%, #0000002e 100%);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.overlay1 {
+  position: absolute;
+  top: 0;
+ 
+  width: 100%;
+  height: 60px;
+ 
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.container1:hover .overlay {
+  opacity: 0.8;
+}
+
+.container1:hover .overlay1 {
+  opacity: 1;
+}
