@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://192.168.123.222:5000/api/v1/",
+    baseURL: "http://localhost:5000/api/v1/",
 });
 export const getWithoutAuth = (link) =>
     API.get(`${link}`);

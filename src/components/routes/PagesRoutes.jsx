@@ -19,6 +19,7 @@ import WatchLater from "../Pages/WatchLater";
 
 function PagesRoutes() {
   const [login, setLogin] = useState(false);
+  const [token, setToken] = useState(null);
   const dispatch = useDispatch();
   React.useEffect(() => {
     const localToken = localStorage.getItem("token");
@@ -38,14 +39,17 @@ function PagesRoutes() {
             dispatch(toogleLoading());
           }
         });
+        setToken(true);
+    }else{
+      setToken(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const auth = useSelector((state) => state.token);
   console.log(auth);
-  if(!auth){
-    return
+  if (token === null) {
+    return;
   }
 
   return (
