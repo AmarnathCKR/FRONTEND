@@ -14,6 +14,7 @@ import {
   unsuscribeToken,
   toogleLoading,
 } from "../../store/store";
+import MovieDetail from "../Pages/MovieDetail";
 
 function PagesRoutes() {
   const [login, setLogin] = useState(false);
@@ -81,6 +82,7 @@ function PagesRoutes() {
               )
             }
           />
+          <Route path="details/:id" element={<MovieDetail />} />
         </Routes>
       </BrowserRouter>
     </>

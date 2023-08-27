@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getWithoutAuth } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 function Content() {
   const [movies, setMovies] = useState();
@@ -11,6 +12,8 @@ function Content() {
   const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 10; // Adjust as needed
   const [searchQuery,setSearch]=useState("");
+
+  const navigate = useNavigate();
   useEffect(() => {
     getWithoutAuth(`movie/all?sortby=${sortFilter}&genreFilter=${genreFilter}&yearFilter=${yearFilter}&search=${searchQuery}&currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`)
       .then((res) => {
@@ -28,7 +31,10 @@ function Content() {
     return (
       <>
         <div key={items._id} className="flex items-center justify-center">
-          <div className="card">
+          <div onClick={()=>navigate(`/details/:${items._id}`, {
+                    state: items._id,
+                    owner: true,
+                  })} className="card">
             <div
               className="card2 p-6"
               style={{

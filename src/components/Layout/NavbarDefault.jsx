@@ -128,7 +128,7 @@ export function NavbarDefault({ toggleLogin }) {
         className="p-1 font-normal"
       >
         <a
-          href="#"
+          
           className="flex text-blue-gray-900 cursor-pointer dark:text-white items-center"
         >
           Watch Later
@@ -141,7 +141,7 @@ export function NavbarDefault({ toggleLogin }) {
         className="p-1 font-normal"
       >
         <a
-          href="#"
+          
           className="flex text-blue-gray-900 cursor-pointer dark:text-white items-center"
         >
           Ratings
@@ -155,7 +155,7 @@ export function NavbarDefault({ toggleLogin }) {
       <div className="container mx-auto flex items-center justify-between bg-white dark:bg-gray-800 text-blue-gray-900 dark:text-white">
         <Typography
           as="a"
-          href="#"
+          
           className="mr-4 cursor-pointer py-1.5 font-medium "
         >
           <a onClick={() => {
