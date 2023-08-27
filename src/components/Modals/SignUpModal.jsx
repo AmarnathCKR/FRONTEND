@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import Joi from "joi";
 import { PostAnyApi } from "../../api/api";
 import { useDispatch } from "react-redux";
-import { subscribeToken } from "../../store/store";
+import { subscribeToken, toogleLoading } from "../../store/store";
 
 const schema = Joi.object({
   name: Joi.string().alphanum().min(3).max(30).required(),
@@ -23,6 +23,7 @@ function SignUpModal(props) {
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(toogleLoading());
 
     const { error } = schema.validate({
       name: input.name ? input.name : "d",
@@ -33,15 +34,19 @@ function SignUpModal(props) {
     if (error) {
       if (error.details[0].message.includes("email")) {
         setError({ ...error, email: error.details[0].message });
+        dispatch(toogleLoading());
       }
       if (error.details[0].message.includes("name")) {
         setError({ ...error, name: error.details[0].message });
+        dispatch(toogleLoading());
       }
       if (error.details[0].message.includes("password")) {
         setError({ ...error, password: error.details[0].message });
+        dispatch(toogleLoading());
       }
 
       console.log(error.details[0].message);
+      dispatch(toogleLoading());
     } else {
       setError("");
       PostAnyApi("user/signup", input).then((res)=>{
@@ -49,10 +54,12 @@ function SignUpModal(props) {
         localStorage.setItem("token",res.data.token);
         dispatch(subscribeToken(res.data.token));
         navigate("/");
+        dispatch(toogleLoading());
       })
       .catch((err)=>{
         console.log(err);
         setError({...error,main : err.response.data.error})
+        dispatch(toogleLoading());
       })
     }
   };

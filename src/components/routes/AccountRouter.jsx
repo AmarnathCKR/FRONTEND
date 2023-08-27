@@ -1,12 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAnyApi } from "../../api/api";
-import {
-  subscribeToken,
-  subscribeUser,
-  unsuscribeToken,
-} from "../../store/store";
+import { useSelector } from "react-redux";
+
 import SignUpModal from "../Modals/SignUpModal";
 import LoginModal from "../Modals/LoginModal";
 import AccountPage from "../Pages/AccountPage";

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import Joi from 'joi';
 import { PostAnyApi } from '../../api/api';
 import { useDispatch } from 'react-redux';
-import { subscribeToken } from '../../store/store';
+import { subscribeToken, toogleLoading } from '../../store/store';
 
 const schema = Joi.object({
   
@@ -19,18 +19,21 @@ function LoginModal(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
+    dispatch(toogleLoading());
     event.preventDefault();
 
     const { error } = schema.validate({  email : input.email ?input.email : "n", password: input.password ? input.password : ""});
 
     if (error) {
       if(error.details[0].message.includes("email")){
+        dispatch(toogleLoading());
          setError({...error, email : error.details[0].message})
       }
      if(error.details[0].message.includes("password")){
+      dispatch(toogleLoading());
          setError({...error, password : error.details[0].message})
       }
-      
+      dispatch(toogleLoading());
       console.log(error.details[0].message)
     } else {
       setError('');
@@ -40,10 +43,12 @@ function LoginModal(props) {
         localStorage.setItem("token",res.data.token);
         dispatch(subscribeToken(res.data.token));
         navigate("/");
+        dispatch(toogleLoading());
       })
       .catch((err)=>{
         console.log(err);
         setError({...error,main : err.response.data.error})
+        dispatch(toogleLoading());
       })
     }
   };
@@ -59,7 +64,7 @@ function LoginModal(props) {
           </div>
           <div className="modal-local-body ng-white dark:bg-blue-gray-700 text-black dark:text-white text-center">
             <h2 className="py-3 text-lg font-medium">
-              {error ? "Please fix the errors" : "Please Enter your Details"}
+            {error?.main ? error?.main : "Please Enter your Details"}
             </h2>
             <form onSubmit={handleSubmit}>
             <div className="flex flex-col my-4 mx-2">
