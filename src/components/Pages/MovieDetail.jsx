@@ -20,7 +20,7 @@ function MovieDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.token);
-  console.log("stuff" + auth);
+  
   useEffect(() => {
     if (!auth && location.state) {
       dispatch(toogleLoading);
@@ -91,6 +91,7 @@ function MovieDetail() {
           .then((res) => {
             console.log(res);
             setOwn(false);
+            setTrigger(!trigger);
             dispatch(toogleLoading);
           })
           .catch((err) => {
@@ -101,9 +102,9 @@ function MovieDetail() {
         getAnyApi(`movie/watchlist?movie=${location.state}`, auth)
           .then((res) => {
             console.log(res);
-            setOwn(true);
             dispatch(toogleLoading);
             setTrigger(!trigger);
+            setOwn(true);
           })
           .catch((err) => {
             console.log(err);
