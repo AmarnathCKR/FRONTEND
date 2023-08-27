@@ -91,7 +91,7 @@ function MovieDetail() {
           .then((res) => {
             console.log(res);
             setOwn(false);
-            setTrigger(!trigger);
+            
             dispatch(toogleLoading);
           })
           .catch((err) => {
@@ -103,7 +103,7 @@ function MovieDetail() {
           .then((res) => {
             console.log(res);
             dispatch(toogleLoading);
-            setTrigger(!trigger);
+            
             setOwn(true);
           })
           .catch((err) => {
