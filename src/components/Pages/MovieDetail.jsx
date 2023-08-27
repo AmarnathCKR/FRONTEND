@@ -2,62 +2,77 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAnyApi, getWithoutAuth } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
+import { toogleLoading } from "../../store/store";
 
 function MovieDetail() {
   const [movie, setMovie] = useState(null);
   const [owned, setOwn] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.token);
   console.log("stuff" + auth);
   useEffect(() => {
-    if (!auth) {
+    if (!auth && location.state) {
+        dispatch(toogleLoading);
       getWithoutAuth(`movie/details?movie=${location.state}`)
         .then((res) => {
           console.log(res);
           setMovie(res.data);
+          dispatch(toogleLoading);
         })
         .catch((err) => {
           console.log(err);
+          dispatch(toogleLoading);
         });
     } else {
+        dispatch(toogleLoading);
       getAnyApi(`movie/details/auth?movie=${location.state}`, auth)
         .then((res) => {
+            
           console.log(res);
           setMovie(res.data.movie);
-          if (res.data.movie) {
-            setOwn(true);
-          } else {
-            setOwn(false);
-          }
+          if (res.data.owned) {
+              setOwn(true);
+            } else {
+                setOwn(false);
+            }
+            dispatch(toogleLoading);
         })
         .catch((err) => {
           console.log(err);
+          dispatch(toogleLoading);
         });
     }
   }, []);
 
   const handleWatch = () => {
+    dispatch(toogleLoading);
     if (!auth) {
       navigate("/account");
+      dispatch(toogleLoading);
     } else {
       if (owned) {
         getAnyApi(`movie/watchlist-remove?movie=${location.state}`, auth)
         .then((res) => {
           console.log(res);
           setOwn(false);
+          dispatch(toogleLoading);
         })
         .catch((err) => {
           console.log(err);
+          dispatch(toogleLoading);
         });
       }else{
         getAnyApi(`movie/watchlist?movie=${location.state}`, auth)
         .then((res) => {
           console.log(res);
           setOwn(true);
+          dispatch(toogleLoading);
         })
         .catch((err) => {
           console.log(err);
+          dispatch(toogleLoading);
         });
       }
       

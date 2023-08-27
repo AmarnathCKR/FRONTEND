@@ -14,7 +14,7 @@ function App() {
   const handleLoading = ()=>{
     dispatch(toogleLoading())
   }
-
+  
   return (
     <>
       {loading && <div className="z-50 loader-local bg-secondary"><ClipLoader className="bg-white" /></div>}

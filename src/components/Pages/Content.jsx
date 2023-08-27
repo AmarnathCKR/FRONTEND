@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { getWithoutAuth } from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toogleLoading } from "../../store/store";
 
 function Content() {
   const [movies, setMovies] = useState();
@@ -14,16 +17,20 @@ function Content() {
   const [searchQuery,setSearch]=useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(toogleLoading);
     getWithoutAuth(`movie/all?sortby=${sortFilter}&genreFilter=${genreFilter}&yearFilter=${yearFilter}&search=${searchQuery}&currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`)
       .then((res) => {
         setMovies(res.data.movies);
         console.log(res);
         setSort({ genre: res.data.genre, year: res.data.year });
         setTotalPages(Math.ceil(res.data.totalItems / itemsPerPage));
+        dispatch(toogleLoading);
       })
       .catch((err) => {
         console.log(err);
+        dispatch(toogleLoading);
       });
   }, [yearFilter,sortFilter,genreFilter,currentPage,searchQuery]);
 

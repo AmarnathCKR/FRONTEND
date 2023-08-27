@@ -26,15 +26,15 @@ function LoginModal(props) {
 
     if (error) {
       if(error.details[0].message.includes("email")){
+        setError({...error, email : error.details[0].message})
         dispatch(toogleLoading());
-         setError({...error, email : error.details[0].message})
       }
      if(error.details[0].message.includes("password")){
-      dispatch(toogleLoading());
-         setError({...error, password : error.details[0].message})
+       setError({...error, password : error.details[0].message})
+       dispatch(toogleLoading());
       }
-      dispatch(toogleLoading());
       console.log(error.details[0].message)
+      dispatch(toogleLoading());
     } else {
       setError('');
       // Submit form data

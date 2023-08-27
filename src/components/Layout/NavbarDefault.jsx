@@ -128,25 +128,15 @@ export function NavbarDefault({ toggleLogin }) {
         className="p-1 font-normal"
       >
         <a
-          
+          onClick={() => {
+            navigate("/watchlater");
+          }}
           className="flex text-blue-gray-900 cursor-pointer dark:text-white items-center"
         >
           Watch Later
         </a>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a
-          
-          className="flex text-blue-gray-900 cursor-pointer dark:text-white items-center"
-        >
-          Ratings
-        </a>
-      </Typography>
+      
     </ul>
   );
 

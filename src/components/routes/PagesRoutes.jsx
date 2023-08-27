@@ -15,6 +15,7 @@ import {
   toogleLoading,
 } from "../../store/store";
 import MovieDetail from "../Pages/MovieDetail";
+import WatchLater from "../Pages/WatchLater";
 
 function PagesRoutes() {
   const [login, setLogin] = useState(false);
@@ -43,6 +44,9 @@ function PagesRoutes() {
 
   const auth = useSelector((state) => state.token);
   console.log(auth);
+  if(!auth){
+    return
+  }
 
   return (
     <>
@@ -83,6 +87,21 @@ function PagesRoutes() {
             }
           />
           <Route path="details/:id" element={<MovieDetail />} />
+          <Route
+            path="watchlater/*"
+            element={
+              auth ? (
+                <WatchLater />
+              ) : (
+                <AccountRouter
+                  login={login}
+                  toggleLogin={() => {
+                    setLogin(!login);
+                  }}
+                />
+              )
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
