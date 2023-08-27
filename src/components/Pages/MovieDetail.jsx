@@ -127,7 +127,7 @@ function MovieDetail() {
         setTrigger(!trigger);
         MySwal.fire({
           title: "You have rated this movie",
-          text: `You have rated this movie ${ratingRef.current} stars.`,
+          text: `You have rated this movie ${rating} stars.`,
           icon: "success",
         });
       })
