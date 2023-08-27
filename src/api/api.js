@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "https://git-repo-webservice.onrender.com/api/v1/",
+    baseURL: "http://localhost:5000/api/v1/",
 });
 export const getWithoutAuth = (link) =>
     API.get(`${link}`);

@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toogleLoading } from "../../store/store";
 
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import RatingStars1 from "../Layout/RatingStars1";
 
-const MySwal = withReactContent(Swal);
+const MySwal = Swal;
 
 function MovieDetail() {
   const [movie, setMovie] = useState(null);
@@ -115,14 +114,13 @@ function MovieDetail() {
     }
   };
 
-  const handleRatingChange = (event) => {
-    ratingRef.current = event.target.value;
-  };
+  
 
   const handleSubmit = (id) => {
     // Execute your function here
     console.log("Function executed!");
-    getAnyApi(`movie/rating?movie=${id}&rating=${ratingRef.current}`, auth)
+    const rating = document.getElementById("ratebar").value;
+    getAnyApi(`movie/rating?movie=${id}&rating=${rating}`, auth)
       .then((res) => {
         console.log(res.data);
         setTrigger(!trigger);
@@ -150,20 +148,7 @@ function MovieDetail() {
     if (!voted) {
       MySwal.fire({
         title: "Rate this product",
-        html: (
-          <div>
-            <input
-              type="range"
-              min="0"
-              max="5"
-              step="0.5"
-              value={ratingRef.current}
-              onChange={handleRatingChange}
-            />
-            <br />
-            <span>{ratingRef.current} stars</span>
-          </div>
-        ),
+        html:  '<input type="range" min="0" max="5"step="0.5"  id="ratebar" />',
         showCancelButton: true,
         confirmButtonText: "Submit",
         preConfirm: () => handleSubmit(id),
